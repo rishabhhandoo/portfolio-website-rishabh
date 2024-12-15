@@ -1,0 +1,279 @@
+/* Base styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: #fff;
+    color: #000;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Container and page styles */
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+}
+
+.intro-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(0);
+}
+
+.experience-page {
+    transform: translateX(100%);
+}
+
+.page.active {
+    transform: translateX(0);
+}
+
+.page.inactive-left {
+    transform: translateX(-100%);
+}
+
+.page.inactive-right {
+    transform: translateX(100%);
+}
+
+/* Navigation and overlay */
+.nav-arrow {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+.nav-arrow:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+.nav-arrow svg {
+    width: 30px;
+    height: 30px;
+    transition: all 0.3s ease;
+}
+
+.page-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0);
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 50;
+    backdrop-filter: blur(0px);
+}
+
+.nav-arrow:hover + .page-overlay {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.hover-text {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    letter-spacing: 4px;
+    color: #333;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 51;
+}
+
+.nav-arrow:hover + .page-overlay + .hover-text {
+    opacity: 1;
+}
+
+/* Intro page specific styles */
+.container {
+    text-align: center;
+    padding: 2rem;
+}
+
+.name {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.roles {
+    font-size: 1rem;
+    min-height: 1.5rem;
+    color: #333;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+.role {
+    position: absolute;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideIn 1s forwards;
+}
+
+/* Resume page styles */
+.resume-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 2rem;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+}
+
+.resume-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.resume-content.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.resume-section {
+    margin-bottom: 2.5rem;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+}
+
+.education-item, .experience-item, .project-item {
+    margin-bottom: 1.5rem;
+}
+
+.education-item h3, .experience-item h3, .project-item h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.period {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.points-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0.5rem;
+}
+
+.points-list li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.2rem;
+    position: relative;
+}
+
+.points-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.skill-category h4 {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.achievements-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.achievements-list li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.2rem;
+    position: relative;
+}
+
+.achievements-list li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    20% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    80% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* Scrollbar styling */
+.resume-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.resume-container::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+.resume-container::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+    .name {
+        font-size: 2rem;
+    }
+    
+    .roles {
+        font-size: 0.9rem;
+    }
+    
+    .resume-container {
+        padding: 0 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+}
